@@ -1,16 +1,12 @@
 import { motion } from "framer-motion";
 import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from "recharts";
-const salesByCategory = [
-	{ name: "Electronics", value: 400 },
-	{ name: "Clothing", value: 300 },
-	{ name: "Home & Garden", value: 200 },
-	{ name: "Books", value: 100 },
-	{ name: "Others", value: 150 },
-];
+import { useStats } from "../../context/StatContext";
 
 const COLORS = ["#8884d8", "#82ca9d", "#ffc658", "#ff8042", "#0088FE"];
 
 const SalesByCategoryChart = () => {
+	const { stats } = useStats();
+	const salesByCategory = stats.salesByCategory;
 	return (
 		<motion.div
 			className='bg-gray-800 bg-opacity-50 backdrop-blur-md shadow-lg rounded-xl p-6 border border-gray-700'
@@ -30,7 +26,8 @@ const SalesByCategoryChart = () => {
 							outerRadius={80}
 							fill='#8884d8'
 							dataKey='value'
-							label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
+							nameKey='category'
+							label={({ category, percent }) => `${category} ${(percent * 100).toFixed(0)}%`}
 						>
 							{salesByCategory.map((entry, index) => (
 								<Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />

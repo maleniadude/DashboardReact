@@ -32,6 +32,49 @@ const generateCategoryStats = (category) => {
 	});
 };
 
+//datos para los piecharts
+const generateCategoryDistribution = () => {
+	const categories = ["Electronics", "Clothing", "Home", "Books", "Sports"];
+	return categories.map((name) => ({
+		name,
+		value: Math.floor(Math.random() * 3000 + 1000),
+	}));
+};
+
+const generateUserDemographics = () => {
+	const segments = ["18-24", "25-34", "35-44", "45-54", "55+"];
+	return segments.map((group) => ({
+		group,
+		value: Math.floor(Math.random() * 2000 + 500),
+	}));
+};
+
+const generateSalesByCategory = () => {
+	const categories = ["Electronics", "Clothing", "Books", "Home", "Toys"];
+	return categories.map((category) => ({
+		category,
+		value: Math.floor(Math.random() * 3000 + 1000),
+	}));
+};
+
+const generateOrderStatusDistribution = () => {
+	return [
+		{ status: "Completed", value: Math.floor(Math.random() * 500 + 200) },
+		{ status: "Pending", value: Math.floor(Math.random() * 300 + 100) },
+		{ status: "Canceled", value: Math.floor(Math.random() * 200 + 50) },
+		{ status: "Refunded", value: Math.floor(Math.random() * 100 + 20) },
+	];
+};
+
+const generateChannelPerformance = () => {
+	const channels = ["Website", "Mobile App", "Email", "Social Media", "Affiliates", "Others"];
+	return channels.map((name) => ({
+		name,
+		value: Math.floor(Math.random() * 1500 + 300),
+	}));
+};
+
+//datos para linecharts
 const generateRevenueData = () => {
 	const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"];
 	return months.map((month) => ({
@@ -89,17 +132,25 @@ export const useStats = () => useContext(StatContext);
 // Provider
 const StatProvider = ({ children }) => {
 	const generateStats = () => ({
+		// datos generales
 		products: generateCategoryStats("products"),
 		sales: generateCategoryStats("sales"),
 		users: generateCategoryStats("users"),
 		orders: generateCategoryStats("orders"),
 		analytics: generateCategoryStats("analytics"),
+		// datos de linecharts
 		revenueChart: generateRevenueData(),
 		salesTrend: generateSalesTrend(),
 		userGrowth: generateUserGrowth(),
 		dailyOrders: generateDailyOrders(),
 		userRetention: generateUserRetention(),
-		salesData: RandomSalesData()
+		salesData: RandomSalesData(),
+		// datos de piecharts
+		categoryDistribution: generateCategoryDistribution(),
+		userDemographics: generateUserDemographics(),
+		salesByCategory: generateSalesByCategory(),
+		orderStatusDistribution: generateOrderStatusDistribution(),
+		channelPerformance: generateChannelPerformance()
 	});
 	
 

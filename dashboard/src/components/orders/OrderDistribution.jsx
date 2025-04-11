@@ -1,15 +1,13 @@
 import { motion } from "framer-motion";
-import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, Legend } from "recharts";
+import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from "recharts";
+import { useStats } from "../../context/StatContext";
 
-const orderStatusData = [
-	{ name: "Pending", value: 30 },
-	{ name: "Processing", value: 45 },
-	{ name: "Shipped", value: 60 },
-	{ name: "Delivered", value: 120 },
-];
-const COLORS = ["#FF6B6B", "#4ECDC4", "#45B7D1", "#FED766", "#2AB7CA"];
+const COLORS = ["#8884d8", "#82ca9d", "#ffc658", "#ff8042", "#0088FE"];
 
-const OrderDistribution = () => {
+const OrderStatusDistributionChart = () => {
+	const { stats } = useStats();
+	const statusData = stats.orderStatusDistribution;
+
 	return (
 		<motion.div
 			className='bg-gray-800 bg-opacity-50 backdrop-blur-md shadow-lg rounded-xl p-6 border border-gray-700'
@@ -18,19 +16,20 @@ const OrderDistribution = () => {
 			transition={{ delay: 0.3 }}
 		>
 			<h2 className='text-xl font-semibold text-gray-100 mb-4'>Order Status Distribution</h2>
+
 			<div style={{ width: "100%", height: 300 }}>
 				<ResponsiveContainer>
 					<PieChart>
 						<Pie
-							data={orderStatusData}
+							data={statusData}
 							cx='50%'
 							cy='50%'
-							outerRadius={80}
-							fill='#8884d8'
+							outerRadius={90}
 							dataKey='value'
-							label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
+							nameKey='status'
+							label={({ status, percent }) => `${status} ${(percent * 100).toFixed(0)}%`}
 						>
-							{orderStatusData.map((entry, index) => (
+							{statusData.map((entry, index) => (
 								<Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
 							))}
 						</Pie>
@@ -48,4 +47,6 @@ const OrderDistribution = () => {
 		</motion.div>
 	);
 };
-export default OrderDistribution;
+
+export default OrderStatusDistributionChart;
+
