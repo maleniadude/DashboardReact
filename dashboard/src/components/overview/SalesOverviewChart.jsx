@@ -1,22 +1,20 @@
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 import { motion } from "framer-motion";
+import { useStats } from "../../context/StatContext";
 
-const salesData = [
-	{ name: "Jul", sales: 4200 },
-	{ name: "Aug", sales: 3800 },
-	{ name: "Sep", sales: 5100 },
-	{ name: "Oct", sales: 4600 },
-	{ name: "Nov", sales: 5400 },
-	{ name: "Dec", sales: 7200 },
-	{ name: "Jan", sales: 6100 },
-	{ name: "Feb", sales: 5900 },
-	{ name: "Mar", sales: 6800 },
-	{ name: "Apr", sales: 6300 },
-	{ name: "May", sales: 7100 },
-	{ name: "Jun", sales: 7500 },
-];
+const RandomSalesData = () => {
+	const months = ["Jul", "Aug", "Sep", "Oct", "Nov", "Dec", "Jan", "Feb", "Mar", "Apr"];
+	return months.map(month => ({
+		name: month,
+		sales: Math.floor(Math.random() * 4000 + 4000),
+	}));
+};
+
 
 const SalesOverviewChart = () => {
+	const { stats } = useStats();
+	const salesData = stats.salesData;
+
 	return (
 		<motion.div
 			className='bg-gray-800 bg-opacity-50 backdrop-blur-md shadow-lg rounded-xl p-6 border border-gray-700'
@@ -35,18 +33,14 @@ const SalesOverviewChart = () => {
 						<Tooltip
 							contentStyle={{
 								backgroundColor: "rgba(31, 41, 55, 0.8)",
-								borderColor: "#4B5563",
-							}}
-							itemStyle={{ color: "#E5E7EB" }}
-						/>
-						<Line
-							type='monotone'
-							dataKey='sales'
-							stroke='#6366F1'
-							strokeWidth={3}
-							dot={{ fill: "#6366F1", strokeWidth: 2, r: 6 }}
-							activeDot={{ r: 8, strokeWidth: 2 }}
-						/>
+								borderColor: "#4B5563",}}
+							itemStyle={{ color: "#E5E7EB" }}/>
+						<Line	type='monotone'
+								dataKey='sales'
+								stroke='#6366F1'
+								strokeWidth={3}
+								dot={{ fill: "#6366F1", strokeWidth: 2, r: 6 }}
+								activeDot={{ r: 8, strokeWidth: 2 }}/>
 					</LineChart>
 				</ResponsiveContainer>
 			</div>

@@ -1,18 +1,11 @@
 import { motion } from "framer-motion";
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 import { useState } from "react";
-
-const monthlySalesData = [
-	{ month: "Jan", sales: 4000 },
-	{ month: "Feb", sales: 3000 },
-	{ month: "Mar", sales: 5000 },
-	{ month: "Apr", sales: 4500 },
-	{ month: "May", sales: 6000 },
-	{ month: "Jun", sales: 5500 },
-	{ month: "Jul", sales: 7000 },
-];
+import { useStats } from "../../context/StatContext";
 
 const SalesOverviewChart = () => {
+	const { stats } = useStats();
+	const salesData = stats.salesData;
 	const [selectedTimeRange, setSelectedTimeRange] = useState("This Month");
 
 	return (
@@ -41,14 +34,13 @@ const SalesOverviewChart = () => {
 
 			<div className='w-full h-80'>
 				<ResponsiveContainer>
-					<AreaChart data={monthlySalesData}>
+					<AreaChart data={salesData}>
 						<CartesianGrid strokeDasharray='3 3' stroke='#374151' />
 						<XAxis dataKey='month' stroke='#9CA3AF' />
 						<YAxis stroke='#9CA3AF' />
 						<Tooltip
 							contentStyle={{ backgroundColor: "rgba(31, 41, 55, 0.8)", borderColor: "#4B5563" }}
-							itemStyle={{ color: "#E5E7EB" }}
-						/>
+							itemStyle={{ color: "#E5E7EB" }}/>
 						<Area type='monotone' dataKey='sales' stroke='#8B5CF6' fill='#8B5CF6' fillOpacity={0.3} />
 					</AreaChart>
 				</ResponsiveContainer>
