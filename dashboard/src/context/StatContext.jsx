@@ -32,6 +32,40 @@ const generateCategoryStats = (category) => {
 	});
 };
 
+// datos para los barcharts
+const generateUserActivityHeatmap = () => {
+	const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+	return days.map((day) => ({
+		name: day,
+		"0-4": Math.floor(Math.random() * 20),
+		"4-8": Math.floor(Math.random() * 40),
+		"8-12": Math.floor(Math.random() * 80),
+		"12-16": Math.floor(Math.random() * 60),
+		"16-20": Math.floor(Math.random() * 50),
+		"20-24": Math.floor(Math.random() * 30),
+	}));
+};
+
+
+const generateDailySalesTrend = () => {
+	const days = Array.from({ length: 30 }, (_, i) => `Day ${i + 1}`);
+	return days.map((day) => ({
+		day,
+		sales: Math.floor(Math.random() * 500 + 200),
+	}));
+};
+
+const generateProductPerformance = () => {
+	const products = ["Product A", "Product B", "Product C", "Product D", "Product E"];
+	return products.map((name) => ({
+		name,
+		sales: Math.floor(Math.random() * 5000 + 1000),
+		revenue: parseFloat((Math.random() * 2000 + 300).toFixed(1)),
+		return: Math.floor(Math.random() * 500),
+	}));
+};
+
+
 //datos para los piecharts
 const generateCategoryDistribution = () => {
 	const categories = ["Electronics", "Clothing", "Home", "Books", "Sports"];
@@ -150,7 +184,11 @@ const StatProvider = ({ children }) => {
 		userDemographics: generateUserDemographics(),
 		salesByCategory: generateSalesByCategory(),
 		orderStatusDistribution: generateOrderStatusDistribution(),
-		channelPerformance: generateChannelPerformance()
+		channelPerformance: generateChannelPerformance(),
+		// datos para barcharts
+		userActivityHeatmap: generateUserActivityHeatmap(),
+		dailySalesTrend: generateDailySalesTrend(),
+		productPerformance: generateProductPerformance(),
 	});
 	
 

@@ -9,17 +9,19 @@ import {
 	Legend,
 	Tooltip,
 } from "recharts";
-
-const customerSegmentationData = [
-	{ subject: "Engagement", A: 120, B: 110, fullMark: 150 },
-	{ subject: "Loyalty", A: 98, B: 130, fullMark: 150 },
-	{ subject: "Satisfaction", A: 86, B: 130, fullMark: 150 },
-	{ subject: "Spend", A: 99, B: 100, fullMark: 150 },
-	{ subject: "Frequency", A: 85, B: 90, fullMark: 150 },
-	{ subject: "Recency", A: 65, B: 85, fullMark: 150 },
-];
+const generateCustomerSegmentationData = () => {
+	const categories = ["Engagement", "Loyalty", "Satisfaction", "Spend", "Frequency", "Recency"];
+	return categories.map((subject) => ({
+		subject,
+		A: Math.floor(Math.random() * 150),
+		B: Math.floor(Math.random() * 150),
+		fullMark: 150,
+	}));
+};
 
 const CustomerSegmentation = () => {
+	const customerSegmentationData = generateCustomerSegmentationData();
+
 	return (
 		<motion.div
 			className='bg-gray-800 bg-opacity-50 backdrop-filter backdrop-blur-lg shadow-lg rounded-xl p-6 border border-gray-700'
@@ -50,4 +52,5 @@ const CustomerSegmentation = () => {
 		</motion.div>
 	);
 };
+
 export default CustomerSegmentation;

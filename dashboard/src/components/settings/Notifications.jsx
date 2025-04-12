@@ -1,33 +1,59 @@
-import { useState } from "react";
-import SettingSection from "./SettingSection";
+import { useEffect, useState } from "react";
 import { Bell } from "lucide-react";
+import SettingSection from "./SettingSection";
 import ToggleSwitch from "./ToggleSwitch";
+import { useUser } from "../../context/UserContext";
+import { toast } from "react-toastify";
 
 const Notifications = () => {
+	const { currentUser, updateUser } = useUser();
+
 	const [notifications, setNotifications] = useState({
-		push: true,
+		push: false,
 		email: false,
-		sms: true,
+		sms: false,
 	});
 
+	useEffect(() => {
+		if (currentUser?.notifications) {
+			setNotifications(currentUser.notifications);
+		}
+	}, [currentUser]);
+
+	const handleToggle = async (type) => {
+		const updated = { ...notifications, [type]: !notifications[type] };
+		setNotifications(updated);
+
+		// Actualizamos el usuario en el contexto
+		try {
+			await updateUser(currentUser.id, { notifications: updated });
+
+			toast.success("✅ Preferencias de notificación actualizadas.");
+		} catch (error) {
+			// En caso de error
+			toast.error("❌ Error al actualizar las preferencias.");
+		}
+	};
+
 	return (
-		<SettingSection icon={Bell} title={"Notifications"}>
+		<SettingSection icon={Bell} title={"Notificaciones"}>
 			<ToggleSwitch
-				label={"Push Notifications"}
+				label="Notificaciones Push"
 				isOn={notifications.push}
-				onToggle={() => setNotifications({ ...notifications, push: !notifications.push })}
+				onToggle={() => handleToggle("push")}
 			/>
 			<ToggleSwitch
-				label={"Email Notifications"}
+				label="Notificaciones por Email"
 				isOn={notifications.email}
-				onToggle={() => setNotifications({ ...notifications, email: !notifications.email })}
+				onToggle={() => handleToggle("email")}
 			/>
 			<ToggleSwitch
-				label={"SMS Notifications"}
+				label="Notificaciones por SMS"
 				isOn={notifications.sms}
-				onToggle={() => setNotifications({ ...notifications, sms: !notifications.sms })}
+				onToggle={() => handleToggle("sms")}
 			/>
 		</SettingSection>
 	);
 };
+
 export default Notifications;
