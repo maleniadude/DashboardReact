@@ -16,4 +16,5 @@ const SettingSection = ({ icon: Icon, title, children }) => {
 		</motion.div>
 	);
 };
+
 export default SettingSection;

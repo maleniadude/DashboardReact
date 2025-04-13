@@ -309,7 +309,7 @@ const ProductsTable = () => {
 				exit={{ opacity: 0 }}
 				>
 				<motion.div
-					className="bg-gray-800 text-white rounded-xl p-6 w-full max-w-md border border-gray-700 shadow-xl space-y-4"
+					className="bg-gray-800 text-white rounded-xl p-6 w-full max-w-md shadow-xl space-y-4"
 					initial={{ opacity: 0, scale: 0.9 }}
 					animate={{ opacity: 1, scale: 1 }}
 					exit={{ opacity: 0, scale: 0.9 }}

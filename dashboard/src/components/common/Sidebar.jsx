@@ -23,8 +23,8 @@ const Sidebar = () => {
   return (
         <motion.div
             className={`relative z-10 transition-all duration-300 ease-in-out flex-shrink-0 ${
-                isSidebarOpen ? "w-64" : "w-20"}`}
-            animate={{ width: isSidebarOpen ? 256 : 80 }}
+                isSidebarOpen ? "w-60" : "w-20"}`}
+            animate={{ width: isSidebarOpen ? 175 : 80 }}
         >
             <div className='h-full bg-gray-800 bg-opacity-50 backdrop-blur-md p-4 flex flex-col border-r border-gray-700'>
                 <motion.button

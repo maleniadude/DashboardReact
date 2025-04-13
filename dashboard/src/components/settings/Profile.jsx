@@ -56,19 +56,26 @@ const Profile = () => {
 							initial={{ opacity: 0 }}
 							animate={{ opacity: 1 }}
 							exit={{ opacity: 0 }}
-							className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 px-4">
-							<div className="relative z-10 max-w-md w-full">
-								{showLogin && <Login />}
-								{showRegister && <Register />}
-								<button
-									onClick={() => {
-										setShowLogin(false);
-										setShowRegister(false);
-									}}
-									className="absolute top-2 right-2 text-white bg-red-600 px-2 py-1 rounded hover:bg-red-700 text-sm">
-									X
-								</button>
-							</div>
+							className='fixed inset-0 z-50 flex items-center justify-center
+							bg-gray-950 bg-opacity-80 backdrop-blur-sm'>
+							<motion.div
+								className='bg-gray-900 text-white rounded-xl p-6 w-full max-w-md border border-gray-700 shadow-xl space-y-4'
+								initial={{ opacity: 0, scale: 0.9 }}
+								animate={{ opacity: 1, scale: 1 }}
+								exit={{ opacity: 0, scale: 0.9 }}>
+								<div className="relative z-10 max-w-md w-full">
+									{showLogin && <Login />}
+									{showRegister && <Register />}
+									<button
+										onClick={() => {
+											setShowLogin(false);
+											setShowRegister(false);
+										}}
+										className="absolute top-2 right-2 text-white bg-red-600 px-2 py-1 rounded hover:bg-red-700 text-sm">
+										X
+									</button>
+								</div>
+							</motion.div>
 						</motion.div>
 					)}
 				</AnimatePresence>

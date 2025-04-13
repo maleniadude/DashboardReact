@@ -5,15 +5,11 @@ export const UserContext = createContext();
 export const useUser = () => useContext(UserContext);
 
 const defaultUsers = [
-  {
-    id: crypto.randomUUID(),
-    name: "Usuario Demo",
-    email: "demo@ejemplo.com",
-    password: "123456",
-    avatar: "", // Aquí agregamos un campo de avatar vacío
-    role: "admin",
-    status: "activo",
-  },
+  { id: 1, name: "John Doe", email: "john@example.com", role: "Customer", status: "Active" },
+  { id: 2, name: "Jane Smith", email: "jane@example.com", role: "Admin", status: "Active" },
+  { id: 3, name: "Bob Johnson", email: "bob@example.com", role: "Customer", status: "Inactive" },
+  { id: 4, name: "Alice Brown", email: "alice@example.com", role: "Customer", status: "Active" },
+  { id: 5, name: "Charlie Wilson", email: "charlie@example.com", role: "Moderator", status: "Active" },
 ];
 
 const getLocalUsers = () => {
@@ -32,8 +28,18 @@ export const UserProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(getLocalCurrentUser);
 
   useEffect(() => {
-    localStorage.setItem("users", JSON.stringify(users));
-  }, [users]);
+    const savedUsers = JSON.parse(localStorage.getItem("users")) || [];
+    const combined = [...savedUsers];
+  
+    defaultUsers.forEach((defUser) => {
+      const exists = savedUsers.some((u) => u.id === defUser.id || u.email === defUser.email);
+      if (!exists) combined.push(defUser);
+    });
+  
+    setUsers(combined);
+    localStorage.setItem("users", JSON.stringify(combined));
+  }, []);
+  
 
   useEffect(() => {
     localStorage.setItem("currentUser", JSON.stringify(currentUser));
@@ -64,6 +70,14 @@ export const UserProvider = ({ children }) => {
 
   const logout = () => setCurrentUser(null);
 
+  const addUser = (newUser) => {
+    const userWithId = { ...newUser, id: crypto.randomUUID() };
+    const updatedUsers = [...users, userWithId];
+    setUsers(updatedUsers);
+    localStorage.setItem("users", JSON.stringify(updatedUsers));
+  };
+  
+
   const updateUser = (id, updatedData) => {
     const updatedUsers = users.map((user) => (user.id === id ? { ...user, ...updatedData } : user));
     setUsers(updatedUsers);
@@ -81,7 +95,7 @@ export const UserProvider = ({ children }) => {
 
   return (
     <UserContext.Provider
-      value={{ users, currentUser, register, login, logout, updateUser, deleteUser }}
+      value={{ users, currentUser, register, login, logout, updateUser, deleteUser, addUser, }}
     >
       {children}
     </UserContext.Provider>
