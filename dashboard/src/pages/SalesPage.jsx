@@ -45,3 +45,6 @@ const SalesPage = () => {
 };
 
 export default SalesPage
+
+// SalesOverviewChart(grafico de area), SalesByCategoryChart(grafico de tortas), DailySalesTrend(grafico de barras)
+//datos aleatorios de sales cargados en statcards

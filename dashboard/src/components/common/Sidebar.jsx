@@ -23,8 +23,8 @@ const Sidebar = () => {
   return (
         <motion.div
             className={`relative z-10 transition-all duration-300 ease-in-out flex-shrink-0 ${
-                isSidebarOpen ? "w-60" : "w-20"}`}
-            animate={{ width: isSidebarOpen ? 175 : 80 }}
+                isSidebarOpen ? "w-64" : "w-20"}`}
+            animate={{ width: isSidebarOpen ? 80 : 200 }}
         >
             <div className='h-full bg-gray-800 bg-opacity-50 backdrop-blur-md p-4 flex flex-col border-r border-gray-700'>
                 <motion.button
@@ -41,7 +41,7 @@ const Sidebar = () => {
                             <motion.div className='flex items-center p-4 text-sm font-medium rounded-lg hover:bg-gray-700 transition-colors mb-2'>
                                 <item.icon size={20} style={{ color: item.color, minWidth: "20px" }} />
                                 <AnimatePresence>
-                                    {isSidebarOpen && (
+                                    {!isSidebarOpen && (
                                         <motion.span
                                             className='ml-4 whitespace-nowrap'
                                             initial={{ opacity: 0, width: 0 }}

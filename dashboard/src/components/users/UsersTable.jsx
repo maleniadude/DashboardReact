@@ -3,7 +3,7 @@ import { Edit, Search, Trash2, Plus } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useUser } from "../../context/UserContext";
 
-const roles = ["todos", "admin", "editor", "viewer"];
+const roles = ["todos", "Admin", "Customer", "Moderator"];
 
 const ITEMS_PER_PAGE = 5;
 
@@ -57,7 +57,7 @@ const UsersTable = () => {
 	};
 
 	const handleAddClick = () => {
-		setCurrentUser({ name: "", email: "", role: "viewer" });
+		setCurrentUser({ name: "", email: "", role: "Customer" });
 		setEditErrors({});
 		setAddModalOpen(true);
 	};
@@ -212,17 +212,19 @@ const UsersTable = () => {
 			{/* Header */}
 			<div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4 mb-6">
 				<h2 className="text-xl font-semibold text-gray-100">Lista de Usuarios</h2>
-				<div className="flex gap-2 items-center">
-					<div className="relative">
+
+				<div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
+					<div className="relative w-full sm:w-60">
 						<input
 							type="text"
 							placeholder="Buscar..."
-							className="bg-gray-700 text-white placeholder-gray-400 rounded-lg pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+							className="w-full bg-gray-700 text-white placeholder-gray-400 rounded-lg pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
 							value={searchTerm}
 							onChange={(e) => setSearchTerm(e.target.value)}
 						/>
 						<Search className="absolute left-3 top-2.5 text-gray-400" size={18} />
 					</div>
+
 					<select
 						className="bg-gray-700 text-white rounded-lg px-3 py-2 focus:outline-none"
 						value={selectedRole}
@@ -234,11 +236,12 @@ const UsersTable = () => {
 							</option>
 						))}
 					</select>
+
 					<button
 						onClick={() => {
 							setCurrentUser({ name: "", email: "", role: "usuario" });
 							setEditErrors({});
-							setEditModalOpen(true);
+							setAddModalOpen(true);
 						}}
 						className="bg-blue-700 text-white rounded-lg px-3 py-2 focus:outline-none hover:bg-blue-800"
 					>
@@ -294,11 +297,15 @@ const UsersTable = () => {
 				</table>
 			</div>
 
+			{/* Paginación */}
 			{renderPagination()}
 
+			{/* Modales */}
 			<AnimatePresence>
 				{editModalOpen && currentUser && renderUserModal(true)}
 				{addModalOpen && currentUser && renderUserModal(false)}
+
+				{/* Confirmar eliminación */}
 				{confirmModalOpen && (
 					<motion.div
 						className="fixed inset-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-80 backdrop-blur-sm"
@@ -337,7 +344,12 @@ const UsersTable = () => {
 				)}
 			</AnimatePresence>
 		</motion.div>
+
 	);
 };
 
 export default UsersTable;
+
+// lista de usuarios, para ver los usuarios guardados en localstorage
+// y tenemos para renderizar el modal de creacion, edit y eliminacion
+//a parte de tener un paginado, filtrado y busqueda 

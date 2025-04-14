@@ -36,24 +36,30 @@ const Notifications = () => {
 	};
 
 	return (
-		<SettingSection icon={Bell} title={"Notificaciones"}>
+		<SettingSection icon={Bell} title={""}>
 			<ToggleSwitch
 				label="Notificaciones Push"
+				description="Recibe alertas instantáneas directamente en la app."
 				isOn={notifications.push}
 				onToggle={() => handleToggle("push")}
 			/>
 			<ToggleSwitch
 				label="Notificaciones por Email"
+				description="Te enviaremos un correo para actualizaciones importantes."
 				isOn={notifications.email}
 				onToggle={() => handleToggle("email")}
 			/>
 			<ToggleSwitch
 				label="Notificaciones por SMS"
+				description="Recibe alertas urgentes por mensaje de texto."
 				isOn={notifications.sms}
 				onToggle={() => handleToggle("sms")}
 			/>
+
 		</SettingSection>
 	);
 };
 
 export default Notifications;
+
+//notificaciones con toast para asi probar como funciona el mostrar notificaciones en pantalla

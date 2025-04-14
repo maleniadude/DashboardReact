@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import { Edit, Search, Trash2 } from "lucide-react";
 import { useState, useEffect } from "react";
-import { Dialog } from "@headlessui/react";
 import { AnimatePresence } from 'framer-motion';
 import { useProductContext } from "../../context/ProductContext";
 
@@ -132,27 +131,28 @@ const ProductsTable = () => {
       transition={{ delay: 0.2 }}
     >
 		<div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4 mb-6">
-		<h2 className="text-xl font-semibold text-gray-100">Product List</h2>
+			<h2 className="text-xl font-semibold text-gray-100">Lista de productos</h2>
 		
-		<div className="flex gap-2 items-center">
-			<button
-			onClick={() => setCreateModalOpen(true)}
-			className="bg-green-700 text-white px-4 py-2 rounded hover:bg-green-800"
-			>
-			+
-			</button>
+			<div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
+				<button
+				onClick={() => setCreateModalOpen(true)}
+				className="bg-green-700 text-white px-4 py-2 rounded hover:bg-green-800"
+				>
+				+
+				</button>
 
-			<div className="flex relative">
-				<input
+				
+				<div className="relative w-full sm:w-60">
+					<input
 					type="text"
-					placeholder="Buscar productos..."
-					className="bg-gray-700 text-white placeholder-gray-400 rounded-lg pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-					onChange={(e) => setSearchTerm(e.target.value)}
+					placeholder="Buscar..."
+					className="w-full bg-gray-700 text-white placeholder-gray-400 rounded-lg pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
 					value={searchTerm}
-				/>
-				<Search className="absolute left-3 top-2.5 text-gray-400" size={18} />
+					onChange={(e) => setSearchTerm(e.target.value)}
+					/>
+					<Search className="absolute left-3 top-2.5 text-gray-400" size={18} />
+				</div>
 			</div>
-		</div>
 		</div>
 
     	<div className="overflow-x-auto">

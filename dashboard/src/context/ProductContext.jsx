@@ -7,7 +7,9 @@ const defaultProducts = [
   	{ id: 3, name: "Smart Watch", category: "Electronics", price: 199.99, stock: 56, sales: 650 },
   	{ id: 4, name: "Yoga Mat", category: "Fitness", price: 29.99, stock: 210, sales: 950 },
   	{ id: 5, name: "Coffee Maker", category: "Home", price: 79.99, stock: 78, sales: 720 },
-];
+]; //productos por defecto que luego insertamos en el localstorage para hacer la simulacion 
+//la idea es que se cargan los que estan por defectos(son los unico que por mas que se editen y se eliminen seguiran existiendo)
+//los nuevos se cargan normalmente, se editan y se eliminan permanentemente 
 
 export const ProductContext = createContext();
 
@@ -21,7 +23,7 @@ export const ProductProvider = ({ children }) => {
     defaultProducts.forEach((prod) => {
       const exists = saved.some((p) => p.id === prod.id);
       if (!exists) combined.push(prod);
-    });
+    });//con esto cargamos los defaultproducts dentro del localstorage
 
     setProducts(combined);
     localStorage.setItem("dashboard_product", JSON.stringify(combined));
@@ -35,7 +37,7 @@ export const ProductProvider = ({ children }) => {
     const updated = [...products, productWithId];
     setProducts(updated);
     localStorage.setItem("dashboard_product", JSON.stringify(updated));
-  };
+  };//con esto habilitamos la opcion de agregar productos
   
 
   const updateProduct = (updatedProduct) => {
@@ -44,13 +46,13 @@ export const ProductProvider = ({ children }) => {
     );
     setProducts(updated);
     localStorage.setItem("dashboard_product", JSON.stringify(updated));
-  };
+  };// simplemente para actualizar
 
   const deleteProduct = (id) => {
     const updated = products.filter((p) => p.id !== id);
     setProducts(updated);
     localStorage.setItem("dashboard_product", JSON.stringify(updated));
-  };
+  };//simplemente para eliminar
 
   return (
     <ProductContext.Provider
@@ -63,3 +65,6 @@ export const ProductProvider = ({ children }) => {
 
 
 export const useProductContext = () => useContext(ProductContext);
+
+//esta seria la logica para crear eliminar y editar productos.
+//llamada en lista de productos

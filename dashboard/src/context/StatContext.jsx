@@ -2,7 +2,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import {Zap,Users,ShoppingBag,BarChart2,DollarSign,Clock,TrendingUp,PackageCheck,} from "lucide-react";
 import { statConfig } from "../config/StatConfig";
 
-//  generar valores aleatorios
+// para generar valores aleatorios
 const getRandomStatValue = (label) => {
 	if (label.toLowerCase().includes("rate")) return `${(Math.random() * 100).toFixed(1)}%`;
 	if (label.toLowerCase().includes("value")) return `$${(Math.random() * 200).toFixed(2)}`;
@@ -201,3 +201,8 @@ const StatProvider = ({ children }) => {
 	);
 };
 export default StatProvider;
+
+// generamos los datos para los graficos de forma aleatoria. para probar la parte visual de forma mas sencilla 
+//tambien se podria hacer con tests, pero en este caso asi fue como se realizo 
+//en caso de buscar hacerlo mas dinamico, se tendrian que unificar algunos contextos y componentes para que todo sea mas practico
+// hacer que product context proporcione informacion a statcontext. crear un ordercontext que pase informacion a sales en statcontext y hacer que cada usuario pueda hacer ordenes

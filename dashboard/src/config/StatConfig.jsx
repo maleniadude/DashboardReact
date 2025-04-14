@@ -8,6 +8,7 @@ import {
 	TrendingUp,
 	PackageCheck,
 } from "lucide-react";
+//componente para la configuracion de las estadisticas que se cargan en statcards
 
 export const statConfig = {
 	// Products

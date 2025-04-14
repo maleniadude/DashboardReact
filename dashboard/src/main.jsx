@@ -20,4 +20,7 @@ createRoot(document.getElementById("root")).render(
 		</UserProvider>
     </BrowserRouter>
   </StrictMode>,
+  // BrowserRouter(rutas), UserProvider(proveedor del contexto de usuarios)
+  // StatProvider(proveedor de las stadisticas aleatorias para probar la visualizacion)
+  // ProductProvider(proveedor del contexto de los productos, para cargar desde localstorage)
 )

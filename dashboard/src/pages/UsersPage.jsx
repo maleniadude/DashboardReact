@@ -48,3 +48,8 @@ const UsersPage = () => {
 };
 
 export default UsersPage
+
+// UsersTable(lista de usuarios cargados desde localstorages generado en usercontext)
+// UserGrowthChart(grafico de linea)
+// UserActivityHeatmap(grafico de barra,para ostrar actividad de los usuarios)
+// UserDemographicsChart(grafico de torta, demografico de usuarios)

@@ -48,3 +48,8 @@ const ProductsPage = () => {
 };
 
 export default ProductsPage
+
+// ProductsPage llama a header, ProductsTable(lista de productos desde context(products) cargados desde localstorage), 
+// SalesTrendChart(carga datos aleatorios desde context(stats) para mostrar un grafico de linea) 
+// CategoryDistributionChart(carga tambien datos aleatorios desde context(stats) para mostrar un grafico de torta)
+// tenemos dentro de un motion.div StatCard para cargar desde context datos aleatorios que se muestran como cards

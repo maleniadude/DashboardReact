@@ -51,3 +51,7 @@ const OverviewPage = () => {
 };
 
 export default OverviewPage
+
+// SalesOverviewChart, CategoryDistributionChart, SalesChannelChart cargan datos desde context(stats)
+// para mostrar como funcionan el grafico de tortas, lineas y de barras
+// aqui utilizamos statcard y aplicamos 'const item = stats[category]?.[0];' para cargar la primera stat de cada categoria

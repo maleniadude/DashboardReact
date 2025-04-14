@@ -1,5 +1,12 @@
 import { motion } from "framer-motion";
-import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from "recharts";
+import {
+	PieChart,
+	Pie,
+	Cell,
+	Tooltip,
+	Legend,
+	ResponsiveContainer,
+} from "recharts";
 import { useStats } from "../../context/StatContext";
 
 const COLORS = ["#8884d8", "#82ca9d", "#ffc658", "#ff8042", "#0088FE", "#00C49F"];
@@ -7,22 +14,28 @@ const COLORS = ["#8884d8", "#82ca9d", "#ffc658", "#ff8042", "#0088FE", "#00C49F"
 const ChannelPerformance = () => {
 	const { stats } = useStats();
 	const channelData = stats.channelPerformance;
+
 	return (
 		<motion.div
-			className='bg-gray-800 bg-opacity-50 backdrop-filter backdrop-blur-lg shadow-lg rounded-xl p-6 border border-gray-700'
+			className='bg-gray-800 bg-opacity-50 backdrop-filter backdrop-blur-lg shadow-lg rounded-xl p-4 md:p-6 border border-gray-700 overflow-hidden'
 			initial={{ opacity: 0, y: 20 }}
 			animate={{ opacity: 1, y: 0 }}
 			transition={{ delay: 0.3 }}
 		>
-			<h2 className='text-xl font-semibold text-gray-100 mb-4'>Channel Performance</h2>
-			<div style={{ width: "100%", height: 300 }}>
-				<ResponsiveContainer>
+			{/* Título oculto en pantallas pequeñas */}
+			<h2 className='hidden md:block text-lg md:text-xl font-semibold text-gray-100 mb-3 md:mb-4'>
+				Rendimiento por Canal
+			</h2>
+
+			<div className='h-80'>
+				<ResponsiveContainer width={"100%"} height={"100%"}>
 					<PieChart>
 						<Pie
 							data={channelData}
-							cx='50%'
-							cy='50%'
-							outerRadius={80}
+							cx={"50%"}
+							cy={"50%"}
+							labelLine={false}
+							outerRadius={70}
 							fill='#8884d8'
 							dataKey='value'
 							label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
@@ -45,4 +58,5 @@ const ChannelPerformance = () => {
 		</motion.div>
 	);
 };
+
 export default ChannelPerformance;

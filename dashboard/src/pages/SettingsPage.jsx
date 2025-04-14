@@ -15,3 +15,6 @@ const SettingsPage = () => {
 };
 
 export default SettingsPage;
+
+// profile(dentro de este componente vamos a cargar notifications, infotab, security, dangerzone, logout.
+// si no se tiene cuenta abierta saldran los botones de inicio de sesion y registrarse)

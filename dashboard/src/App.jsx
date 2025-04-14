@@ -33,6 +33,7 @@ function App() {
 			<Route path='/orders' element={<OrdersPage />} />
 			<Route path='/analytics' element={<AnalyticsPage />} />
 			<Route path='/settings' element={<SettingsPage />} />
+			{/* rutas que usamos durante todo el proyecto */}
 		</Routes>
 
 		<ToastContainer
@@ -45,6 +46,7 @@ function App() {
 		bodyClassName={() => "text-sm font-medium"}
 		closeButton={false}
 		/>
+		{/* notificaciones creadas con toastcontainer */}
 
     </div>
   )

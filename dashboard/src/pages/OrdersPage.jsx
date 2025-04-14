@@ -45,3 +45,7 @@ const OrdersPage = () => {
 };
 
 export default OrdersPage
+
+// DailyOrders, OrderDistribution. cargan desde context(stats)
+// grafico de torta y de lineas
+// OrdersTable(lista de productos cargados en estatico)

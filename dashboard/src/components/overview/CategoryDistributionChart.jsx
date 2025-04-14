@@ -14,7 +14,7 @@ const CategoryDistributionChart = () => {
 			animate={{ opacity: 1, y: 0 }}
 			transition={{ delay: 0.3 }}
 		>
-			<h2 className='text-lg font-medium mb-4 text-gray-100'>Category Distribution</h2>
+			<h2 className='text-lg font-medium mb-4 text-gray-100'>Distribucion por categoria</h2>
 			<div className='h-80'>
 				<ResponsiveContainer width={"100%"} height={"100%"}>
 					<PieChart>
@@ -23,7 +23,7 @@ const CategoryDistributionChart = () => {
 							cx={"50%"}
 							cy={"50%"}
 							labelLine={false}
-							outerRadius={80}
+							outerRadius={70}
 							fill='#8884d8'
 							dataKey='value'
 							label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}

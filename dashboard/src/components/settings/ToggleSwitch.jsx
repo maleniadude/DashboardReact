@@ -1,21 +1,20 @@
+// ToggleSwitch.jsx
 const ToggleSwitch = ({ label, isOn, onToggle }) => {
 	return (
-		<div className='flex items-center justify-between py-3'>
-			<span className='text-gray-300'>{label}</span>
+		<div className="flex items-center justify-between py-3 px-4 bg-gray-800 rounded-lg mb-2 flex-wrap sm:flex-nowrap">
+			<span className="text-gray-200 text-sm sm:text-base mb-2 sm:mb-0 w-full sm:w-auto">
+				{label}
+			</span>
 			<button
-				className={`
-        relative inline-flex items-center h-6 rounded-full w-11 transition-colors focus:outline-none
-        ${isOn ? "bg-indigo-600" : "bg-gray-600"}
-        `}
 				onClick={onToggle}
+				className={`w-12 h-6 flex items-center rounded-full p-1 duration-300 ease-in-out ${
+					isOn ? "bg-green-500 justify-end" : "bg-gray-600 justify-start"
+				}`}
 			>
-				<span
-					className={`inline-block size-4 transform transition-transform bg-white rounded-full 
-            ${isOn ? "translate-x-6" : "translate-x-1"}
-            `}
-				/>
+				<span className="w-4 h-4 bg-white rounded-full shadow-md transform transition-transform duration-300" />
 			</button>
 		</div>
 	);
 };
+
 export default ToggleSwitch;

@@ -5,12 +5,12 @@ export const UserContext = createContext();
 export const useUser = () => useContext(UserContext);
 
 const defaultUsers = [
-  { id: 1, name: "John Doe", email: "john@example.com", role: "Customer", status: "Active" },
-  { id: 2, name: "Jane Smith", email: "jane@example.com", role: "Admin", status: "Active" },
-  { id: 3, name: "Bob Johnson", email: "bob@example.com", role: "Customer", status: "Inactive" },
-  { id: 4, name: "Alice Brown", email: "alice@example.com", role: "Customer", status: "Active" },
-  { id: 5, name: "Charlie Wilson", email: "charlie@example.com", role: "Moderator", status: "Active" },
-];
+  { id: 1, name: "Doe", email: "boen@example.com", role: "Customer", status: "Active" },
+  { id: 2, name: "Smidy", email: "mouse@example.com", role: "Admin", status: "Active" },
+  { id: 3, name: "Bob rose", email: "bob@example.com", role: "Customer", status: "Inactive" },
+  { id: 4, name: "Brown", email: "cacas@example.com", role: "Customer", status: "Active" },
+  { id: 5, name: "Cartman", email: "cartas@example.com", role: "Moderator", status: "Active" },
+];//hacemos lo mismo que hicimos con product context
 
 const getLocalUsers = () => {
   const local = JSON.parse(localStorage.getItem("users"));
@@ -40,10 +40,14 @@ export const UserProvider = ({ children }) => {
     localStorage.setItem("users", JSON.stringify(combined));
   }, []);
   
+  useEffect(() => {
+    localStorage.setItem("users", JSON.stringify(users));
+  }, [users]);  
 
   useEffect(() => {
     localStorage.setItem("currentUser", JSON.stringify(currentUser));
   }, [currentUser]);
+  
 
   const register = (name, email, password, image = "") => {
     if (users.find((u) => u.email === email)) return { error: "Email ya registrado" };
@@ -53,8 +57,9 @@ export const UserProvider = ({ children }) => {
       email,
       password,
       avatar: image,
-      role: "cliente",
-      status: "activo",
+      role: "Customer",
+      status: "Active",
+      
     };
     setUsers([...users, newUser]);
     setCurrentUser(newUser);
@@ -70,18 +75,18 @@ export const UserProvider = ({ children }) => {
 
   const logout = () => setCurrentUser(null);
 
+  //aqui se agregaron login, register y logout
+
   const addUser = (newUser) => {
     const userWithId = { ...newUser, id: crypto.randomUUID() };
     const updatedUsers = [...users, userWithId];
     setUsers(updatedUsers);
-    localStorage.setItem("users", JSON.stringify(updatedUsers));
   };
   
 
   const updateUser = (id, updatedData) => {
-    const updatedUsers = users.map((user) => (user.id === id ? { ...user, ...updatedData } : user));
-    setUsers(updatedUsers);
-    if (currentUser?.id === id) setCurrentUser({ ...currentUser, ...updatedData });
+    const updatedUsers = users.map((user) => (user.id === id ? { ...user, ...updatedData } : user)); 
+    setUsers(updatedUsers);    
   };
 
   const deleteUser = (userId) => {

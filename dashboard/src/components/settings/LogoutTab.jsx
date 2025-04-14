@@ -11,11 +11,14 @@ const LogoutTab = () => {
   };
 
   return (
-    <div className="flex flex-col items-center">
-      <p className="text-gray-400 mb-4">¿Seguro que quieres cerrar sesión?</p>
+    <div className="flex flex-col items-center sm:items-start text-center sm:text-left space-y-4 p-4">
+      <p className="text-gray-400 mb-4">
+        ¿Seguro que quieres cerrar sesión? 
+        <span className="block text-sm text-gray-500">Tu sesión actual se cerrará inmediatamente.</span>
+      </p>
       <button
         onClick={handleLogout}
-        className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded transition duration-200"
+        className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-6 rounded transition duration-200 w-full sm:w-auto text-center"
       >
         Cerrar Sesión
       </button>

@@ -47,3 +47,10 @@ const AnalyticsPage = () => {
 };
 
 export default AnalyticsPage
+
+//RevenueChart(grafico de area, comparando revenue con target)
+// ChannelPerformance(grafico de torta, para visualizar los canales de venta)
+// ProductPerformance(grafico de barra, comparativo entre sales, revenue y return)
+// UserRetention(grafico de linea, que muestra la retencion de usuarios)
+// CustomerSegmentation(grafico de segmentos)
+// AIPoweredInsights(comentarios generados aleatoriamente por "ia")
